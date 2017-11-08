@@ -7,6 +7,7 @@
 #include <lib/dvb_ci/dvbci_camgr.h>
 #include <lib/dvb_ci/dvbci_datetimemgr.h>
 #include <lib/dvb_ci/dvbci_mmi.h>
+<<<<<<< HEAD
 #include <lib/dvb_ci/dvbci.h>
 #include <lib/dvb_ci/dvbci_ui.h>
 
@@ -34,6 +35,8 @@ int eDVBCIPlusHelper::doAction()
 	eDVBCIInterfaces::getInstance()->sendDataToHelper(eCIClient::CIPLUSHELPER_DOACTION, m_tslot->getSlotID(), m_session, m_tag, (unsigned char *)"\x00\x00\x00\x00", NULL, 0);
 	return 0;
 }
+=======
+>>>>>>> dev/Dev
 
 DEFINE_REF(eDVBCISession);
 
@@ -175,7 +178,10 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		eDebug("[CI SESS] RESOURCE MANAGER");
 		break;
 	case 0x00020041:
+<<<<<<< HEAD
 	case 0x00020043:
+=======
+>>>>>>> dev/Dev
 		session=new eDVBCIApplicationManagerSession(slot);
 		eDebug("[CI SESS] APPLICATION MANAGER");
 		break;
@@ -183,6 +189,13 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 		session = new eDVBCICAManagerSession(slot);
 		eDebug("[CI SESS] CA MANAGER");
 		break;
+<<<<<<< HEAD
+=======
+	case 0x00240041:
+		session=new eDVBCIDateTimeSession;
+		eDebug("[CI SESS] DATE-TIME");
+		break;
+>>>>>>> dev/Dev
 	case 0x00400041:
 		session = new eDVBCIMMISession(slot);
 		eDebug("[CI SESS] MMI - create session");
@@ -191,6 +204,7 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 //		session=new eDVBCIAuthSession;
 		eDebug("[CI SESS] AuthSession");
 //		break;
+<<<<<<< HEAD
 	case 0x00240041:
 		if (!eDVBCIInterfaces::getInstance()->isClientConnected())
 		{
@@ -207,6 +221,9 @@ void eDVBCISession::createSession(eDVBCISlot *slot, const unsigned char *resourc
 			session = new eDVBCIPlusHelper(slot, tag, session_nb);
 		}
 		break;
+=======
+	case 0x00200041:
+>>>>>>> dev/Dev
 	default:
 		eDebug("[CI SESS] unknown resource type %02x %02x %02x %02x", resource_identifier[0], resource_identifier[1], resource_identifier[2],resource_identifier[3]);
 		session=0;
@@ -363,6 +380,7 @@ eDVBCISession::~eDVBCISession()
 //	eDebug("[CI SESS] destroy %p", this);
 }
 
+<<<<<<< HEAD
 void eDVBCISession::setAction(unsigned int session, int val)
 {
 	if (val)
@@ -374,3 +392,5 @@ void eDVBCISession::setAction(unsigned int session, int val)
 		}
 	}
 }
+=======
+>>>>>>> dev/Dev

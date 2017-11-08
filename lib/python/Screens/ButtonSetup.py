@@ -15,16 +15,32 @@ from ServiceReference import ServiceReference
 from enigma import eServiceReference, eActionMap
 from Components.Label import Label
 
+<<<<<<< HEAD
 ButtonSetupKeys = [	(_("Red"), "red", "Infobar/activateRedButton"),
 	(_("Red long"), "red_long", ""),
 	(_("Green long"), "green_long", ""),
 	(_("Yellow long"), "yellow_long", "Infobar/subtitleSelection"),
+=======
+ButtonSetupKeys = [	(_("Red"), "red", "Infobar/openSingleServiceEPG/1"),
+	(_("Red long"), "red_long", "Infobar/activateRedButton"),
+	(_("Green"), "green", ""),
+	(_("Green long"), "green_long", "Infobar/showAutoTimerList"),
+	(_("Yellow"), "yellow", "Plugins/Extensions/EPGSearch/1"),
+	(_("Yellow long"), "yellow_long", "Plugins/Extensions/IMDb/1"),
+	(_("Blue"), "blue", ""),
+	(_("Blue long"), "blue_long", ""),
+>>>>>>> dev/Dev
 	(_("Info (EPG)"), "info", "Infobar/InfoPressed/1"),
 	(_("Info (EPG) Long"), "info_long", "Infobar/showEventInfoPlugins/1"),
 	(_("Epg/Guide"), "epg", "Infobar/EPGPressed/1"),
 	(_("Epg/Guide long"), "epg_long", "Infobar/showEventGuidePlugins/1"),
 	(_("Left"), "cross_left", ""),
 	(_("Right"), "cross_right", ""),
+<<<<<<< HEAD
+=======
+	(_("Left long"), "cross_left_long", ""),
+	(_("Right long"), "cross_right_long", "Infobar/seekFwdVod"),
+>>>>>>> dev/Dev
 	(_("Up"), "cross_up", ""),
 	(_("Down"), "cross_down", ""),
 	(_("Channel up"), "channelup", ""),
@@ -62,7 +78,11 @@ ButtonSetupKeys = [	(_("Red"), "red", "Infobar/activateRedButton"),
 	(_("Slow"), "slow", ""),
 	(_("Mark/Portal/Playlist"), "mark", ""),
 	(_("Sleep"), "sleep", ""),
+<<<<<<< HEAD
 	(_("Power"), "power", ""),
+=======
+	(_("Power"), "power", "Module/Screens.Standby/Standby"),
+>>>>>>> dev/Dev
 	(_("Power long"), "power_long", ""),
 	(_("HDMIin"), "HDMIin", "Infobar/HDMIIn"),
 	(_("HDMIin") + " " + _("long"), "HDMIin_long", (SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV") or ""),
@@ -132,6 +152,10 @@ def getButtonSetupFunctions():
 	ButtonSetupFunctions.append((_("Start teletext"), "Infobar/startTeletext", "InfoBar"))
 	ButtonSetupFunctions.append((_("Show subservice selection"), "Infobar/subserviceSelection", "InfoBar"))
 	ButtonSetupFunctions.append((_("Letterbox zoom"), "Infobar/vmodeSelection", "InfoBar"))
+<<<<<<< HEAD
+=======
+	ButtonSetupFunctions.append((_("Seekbar"), "Infobar/seekFwdVod", "InfoBar"))
+>>>>>>> dev/Dev
 	if SystemInfo["PIPAvailable"]:
 		ButtonSetupFunctions.append((_("Show PIP"), "Infobar/showPiP", "InfoBar"))
 		ButtonSetupFunctions.append((_("Swap PIP"), "Infobar/swapPiP", "InfoBar"))

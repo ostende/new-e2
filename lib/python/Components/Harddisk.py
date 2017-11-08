@@ -291,7 +291,11 @@ class Harddisk:
 		h.close()
 
 	def createInitializeJob(self):
+<<<<<<< HEAD
 		job = Task.Job(_("Initialising storage device..."))
+=======
+		job = Task.Job(_("Initializing storage device..."))
+>>>>>>> dev/Dev
 		size = self.diskSize()
 		print "[Harddisk] [HD] size: %s MB" % size
 

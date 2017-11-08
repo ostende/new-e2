@@ -1,5 +1,8 @@
 from Screens.Screen import Screen
+<<<<<<< HEAD
 from Screens.MessageBox import MessageBox
+=======
+>>>>>>> dev/Dev
 from Components.ActionMap import ActionMap
 from Components.Language import language
 from Components.config import config
@@ -8,6 +11,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Screens.InfoBar import InfoBar
+<<<<<<< HEAD
 from Components.Language_cache import LANG_TEXT
 from enigma import eTimer
 
@@ -18,6 +22,12 @@ from Tools.LoadPixmap import LoadPixmap
 import gettext
 
 inWizzard = False
+=======
+from Screens.Rc import Rc
+from Tools.Directories import resolveFilename, SCOPE_ACTIVE_SKIN
+from Tools.LoadPixmap import LoadPixmap
+
+>>>>>>> dev/Dev
 
 def LanguageEntryComponent(file, name, index):
 	png = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "countries/" + index + ".png"))
@@ -28,9 +38,12 @@ def LanguageEntryComponent(file, name, index):
 	res = (index, name, png)
 	return res
 
+<<<<<<< HEAD
 def _cached(x):
 	return LANG_TEXT.get(config.osd.language.value, {}).get(x, "")
 
+=======
+>>>>>>> dev/Dev
 class LanguageSelection(Screen):
 	def __init__(self, session, menu_path=""):
 		Screen.__init__(self, session)
@@ -47,6 +60,7 @@ class LanguageSelection(Screen):
 			self["menu_path_compressed"] = StaticText("")
 		Screen.setTitle(self, title)
 
+<<<<<<< HEAD
 		language.InitLang()
 		self.oldActiveLanguage = language.getActiveLanguage()
 		self.catalog = language.getActiveCatalog()
@@ -57,21 +71,34 @@ class LanguageSelection(Screen):
 		self["summarylangsel"] = StaticText()
 		self["languages"] = List(self.list)
 		self["languages"].onSelectionChanged.append(self.changed)
+=======
+		self.oldActiveLanguage = language.getActiveLanguage()
+
+		self.list = []
+		self["summarylangname"] = StaticText()
+		self["languages"] = List(self.list)
+>>>>>>> dev/Dev
 
 		self.updateList()
 		self.onLayoutFinish.append(self.selectActiveLanguage)
 
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("Save"))
+<<<<<<< HEAD
 		self["key_yellow"] = Label(_("Update Cache"))
 		self["key_blue"] = Label(_("Delete Language"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+=======
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+>>>>>>> dev/Dev
 		{
 			"ok": self.save,
 			"cancel": self.cancel,
 			"red": self.cancel,
 			"green": self.save,
+<<<<<<< HEAD
 			"yellow": self.updateCache,
 			"blue": self.delLang,
 		}, -1)
@@ -164,13 +191,48 @@ class LanguageSelection(Screen):
 		config.misc.languageselected.value = 0
 		config.misc.languageselected.save()
 		print "ok"
+=======
+		}, -1)
+
+	def selectActiveLanguage(self):
+		self.setTitle(self.title)
+		pos = 0
+		for pos, x in enumerate(self.list):
+			if x[0] == self.oldActiveLanguage:
+				self["languages"].index = pos
+				break
+
+	def save(self):
+		self.commit(self.run())
+		if InfoBar.instance and self.oldActiveLanguage != config.osd.language.value:
+			self.close(True)
+		else:
+			self.close()
+
+	def cancel(self):
+		language.activateLanguage(self.oldActiveLanguage)
+		self.close()
+
+	def run(self):
+		print "[LanguageSelection] updating language..."
+		lang = self["languages"].getCurrent()[0]
+		if lang != config.osd.language.value:
+			config.osd.language.setValue(lang)
+			config.osd.language.save()
+		return lang
+>>>>>>> dev/Dev
 
 	def commit(self, lang):
 		print "[LanguageSelection] commit language"
 		language.activateLanguage(lang)
 		config.misc.languageselected.value = 0
+<<<<<<< HEAD
 		config.misc.languageselected.save()		
 		
+=======
+		config.misc.languageselected.save()
+
+>>>>>>> dev/Dev
 	def updateList(self):
 		languageList = language.getLanguageList()
 		if not languageList: # no language available => display only english
@@ -180,17 +242,24 @@ class LanguageSelection(Screen):
 		self.list = list
 		self["languages"].list = list
 
+<<<<<<< HEAD
 	def changed(self):
 		self.run(justlocal = True)
 
+=======
+>>>>>>> dev/Dev
 class LanguageWizard(LanguageSelection, Rc):
 	def __init__(self, session):
 		LanguageSelection.__init__(self, session)
 		Rc.__init__(self)
+<<<<<<< HEAD
 		global inWizzard
 		inWizzard = True
 		self.onLayoutFinish.append(self.selectKeys)
 
+=======
+		self.onLayoutFinish.append(self.selectKeys)
+>>>>>>> dev/Dev
 		self["wizard"] = Pixmap()
 		self["summarytext"] = StaticText()
 		self["text"] = Label()
@@ -201,6 +270,7 @@ class LanguageWizard(LanguageSelection, Rc):
 		self.selectKey("UP")
 		self.selectKey("DOWN")
 
+<<<<<<< HEAD
 	def changed(self):
 		self.run(justlocal = True)
 		self.setText()
@@ -208,6 +278,11 @@ class LanguageWizard(LanguageSelection, Rc):
 	def setText(self):
 		self["text"].setText(_cached("T1"))
 		self["summarytext"].setText(_cached("T1"))
+=======
+	def setText(self):
+		self["text"].setText(_("Please use the UP/DOWN keys to select your language. Then press the OK button to select it."))
+		self["summarytext"].setText(_("Please use the UP/DOWN keys to select your language. Then press the OK button to select it."))
+>>>>>>> dev/Dev
 
 	def createSummary(self):
 		return LanguageWizardSummary

@@ -21,7 +21,11 @@
 
 static const char *crash_emailaddr =
 #ifndef CRASH_EMAILADDR
+<<<<<<< HEAD
 	"the BlackHole forum";
+=======
+	"the OpenViX forum";
+>>>>>>> dev/Dev
 #else
 	CRASH_EMAILADDR;
 #endif
@@ -140,7 +144,11 @@ void bsodFatal(const char *component)
 		strftime(tm_str, sizeof(tm_str), "%a %b %_d %T %Y", &tm);
 
 		fprintf(f,
+<<<<<<< HEAD
 					"OpenBh Enigma2 Crashlog\n\n"
+=======
+					"OpenViX Enigma2 Crashlog\n\n"
+>>>>>>> dev/Dev
 					"Crashdate = %s\n\n"
 					"%s\n"
 					"Compiled = %s\n"

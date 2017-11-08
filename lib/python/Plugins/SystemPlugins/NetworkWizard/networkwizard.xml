@@ -68,8 +68,13 @@ self.selectKey("OK")
 currStep = self.numSteps
 self.wizard[currStep]["nextstep"] = None
 self.markDone()
+<<<<<<< HEAD
 self.bH_close()
                 </code> 
+=======
+self.close()
+                </code>
+>>>>>>> dev/Dev
         </step>
         <step id="checklanstatusend">
 		<condition>
@@ -187,8 +192,13 @@ self["text"].setText(self.Text)
 currStep = self.numSteps
 self.wizard[currStep]["nextstep"] = None
 self.markDone()
+<<<<<<< HEAD
 self.bH_close()
                 </code> 
+=======
+self.close()
+                </code>
+>>>>>>> dev/Dev
         </step>
         <step id="checkWlanstatusend">
 		<condition>

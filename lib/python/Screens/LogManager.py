@@ -172,7 +172,11 @@ class LogManager(Screen):
 				'red': self.changelogtype,
 				'green': self.showLog,
 				'yellow': self.deletelog,
+<<<<<<< HEAD
 				'blue': self.sendlog_bh,
+=======
+				'blue': self.sendlog,
+>>>>>>> dev/Dev
 				"left": self.left,
 				"right": self.right,
 				"down": self.down,
@@ -182,10 +186,18 @@ class LogManager(Screen):
 		self["key_red"] = Button(_("Debug Logs"))
 		self["key_green"] = Button(_("View"))
 		self["key_yellow"] = Button(_("Delete"))
+<<<<<<< HEAD
+=======
+		self["key_blue"] = Button(_("Send"))
+>>>>>>> dev/Dev
 
 		self.onChangedEntry = [ ]
 		self.sentsingle = ""
 		self.selectedFiles = config.logmanager.sentfiles.value
+<<<<<<< HEAD
+=======
+		self.previouslySent = config.logmanager.sentfiles.value
+>>>>>>> dev/Dev
 		self.defaultDir = config.crash.debug_path.value
 		self.matchingPattern = 'Enigma2_crash_'
 		self.filelist = MultiFileSelectList(self.selectedFiles, self.defaultDir, showDirectories = False, matchingPattern = self.matchingPattern )
@@ -232,6 +244,10 @@ class LogManager(Screen):
 
 	def saveSelection(self):
 		self.selectedFiles = self["list"].getSelectedList()
+<<<<<<< HEAD
+=======
+		self.previouslySent = self["list"].getSelectedList()
+>>>>>>> dev/Dev
 		config.logmanager.sentfiles.setValue(self.selectedFiles)
 		config.logmanager.sentfiles.save()
 		configfile.save()
@@ -319,9 +335,145 @@ class LogManager(Screen):
 				remove(self.defaultDir + self.sel[0])
 			self["list"].changeDir(self.defaultDir)
 			self["LogsSize"].update(config.crash.debug_path.value)
+<<<<<<< HEAD
 			
 	def sendlog_bh(self, addtionalinfo = None):
 		self.session.open(MessageBox, _("Sorry due to spamming, log sending has been disabled.\nPlease post your log @ www.vuplus-community.net."), MessageBox.TYPE_INFO)
+=======
+
+	def sendlog(self, addtionalinfo = None):
+		try:
+			self.sel = self["list"].getCurrent()[0]
+		except:
+			self.sel = None
+		if self.sel:
+			self.sel = str(self.sel[0])
+			self.selectedFiles = self["list"].getSelectedList()
+			self.resend = False
+			for send in self.previouslySent:
+				if send in self.selectedFiles:
+					self.selectedFiles.remove(send)
+				if send == (self.defaultDir + self.sel):
+					self.resend = True
+			if self.selectedFiles:
+				message = _("Do you want to send all the selected files:\n(choose 'No' to only send the currently selected file.)")
+				ybox = self.session.openWithCallback(self.sendlog1, MessageBox, message, MessageBox.TYPE_YESNO)
+				ybox.setTitle(_("Send Confirmation"))
+			elif self.sel and not self.resend:
+				self.sendallfiles = False
+				message = _("Are you sure you want to send this log:\n") + self.sel
+				ybox = self.session.openWithCallback(self.sendlog2, MessageBox, message, MessageBox.TYPE_YESNO)
+				ybox.setTitle(_("Send Confirmation"))
+			elif self.sel and self.resend:
+				self.sendallfiles = False
+				message = _("You have already sent this log, are you sure you want to resend it?\n") + self.sel
+				ybox = self.session.openWithCallback(self.sendlog2, MessageBox, message, MessageBox.TYPE_YESNO)
+				ybox.setTitle(_("Send Confirmation"))
+		else:
+			self.session.open(MessageBox, _("You have not selected any logs to send"), MessageBox.TYPE_INFO, timeout = 10)
+
+	def sendlog1(self, answer):
+		if answer:
+			self.sendallfiles = True
+			message = _("Do you want to add any additional information ?")
+			ybox = self.session.openWithCallback(self.sendlog3, MessageBox, message, MessageBox.TYPE_YESNO)
+			ybox.setTitle(_("Additional Info"))
+		else:
+			self.sendallfiles = False
+			message = _("Are you sure you want to send this log:\n") + self.sel
+			ybox = self.session.openWithCallback(self.sendlog2, MessageBox, message, MessageBox.TYPE_YESNO)
+			ybox.setTitle(_("Send Confirmation"))
+
+	def sendlog2(self, answer):
+		if answer:
+			self.sendallfiles = False
+			message = _("Do you want to add any additional information ?")
+			ybox = self.session.openWithCallback(self.sendlog3, MessageBox, message, MessageBox.TYPE_YESNO)
+			ybox.setTitle(_("Additional Info"))
+
+	def sendlog3(self, answer):
+		if answer:
+			message = _("Do you want to attach a text file to explain the log ?\n(choose 'No' to type message using virtual keyboard.)")
+			ybox = self.session.openWithCallback(self.sendlog4, MessageBox, message, MessageBox.TYPE_YESNO)
+			ybox.setTitle(_("Attach a file"))
+		else:
+			self.doSendlog()
+
+	def sendlog4(self, answer):
+		if answer:
+			self.session.openWithCallback(self.doSendlog, LogManagerFb)
+		else:
+			from Screens.VirtualKeyBoard import VirtualKeyBoard
+			self.session.openWithCallback(self.doSendlog, VirtualKeyBoard, title = 'Additonal Info')
+
+	def doSendlog(self, additonalinfo = None):
+		ref = str(time())
+		# Create the container (outer) email message.
+		msg = MIMEMultipart()
+		if config.logmanager.user.value != '' and config.logmanager.useremail.value != '':
+			fromlogman = config.logmanager.user.value + '  <' + config.logmanager.useremail.value + '>'
+			tovixlogs = 'vixlogs@oe-alliance.com'
+			msg['From'] = fromlogman
+			msg['To'] = tovixlogs
+			msg['Cc'] = fromlogman
+			msg['Date'] = formatdate(localtime=True)
+			msg['Subject'] = 'Ref: ' + ref
+			if additonalinfo != "":
+				msg.attach(MIMEText(additonalinfo, 'plain'))
+			else:
+				msg.attach(MIMEText(config.logmanager.additionalinfo.value, 'plain'))
+			if self.sendallfiles:
+				self.selectedFiles = self["list"].getSelectedList()
+				for send in self.previouslySent:
+					if send in self.selectedFiles:
+						self.selectedFiles.remove(send)
+				self.sel = ",".join(self.selectedFiles).replace(",", " ")
+				self["list"].instance.moveSelectionTo(0)
+				for f in self.selectedFiles:
+					self.previouslySent.append(f)
+					fp = open(f, 'rb')
+					data = MIMEText(fp.read())
+					fp.close()
+					msg.attach(data)
+					self.saveSelection()
+					sentfiles = self.sel
+			else:
+				self.sel = self["list"].getCurrent()[0]
+				self.sel = str(self.sel[0])
+				sentfiles = self.sel
+				fp = open((self.defaultDir + self.sel), 'rb')
+				data = MIMEText(fp.read())
+				fp.close()
+				msg.attach(data)
+				self.sentsingle = self.defaultDir + self.sel
+				self.changeSelectionState()
+				self.saveSelection()
+
+			# Send the email via our own SMTP server.
+			wos_user = 'vixlogs@oe-alliance.com'
+			wos_pwd = base64.b64decode('elZMRFMwaFprNUdp')
+
+			try:
+				print "[LogManager] connecting to server: mail.oe-alliance.com"
+				#socket.setdefaulttimeout(30)
+				s = smtplib.SMTP("mail.oe-alliance.com", 26)
+				s.login(wos_user, wos_pwd)
+				if config.logmanager.usersendcopy.value:
+					s.sendmail(fromlogman, [tovixlogs, fromlogman], msg.as_string())
+					s.quit()
+					self.session.open(MessageBox, sentfiles + ' ' + _('has been sent to the ViX team.\nplease quote') + ' ' + str(ref) + ' ' + _('when asking questions about this log\n\nA copy has been sent to yourself.'), MessageBox.TYPE_INFO)
+				else:
+					s.sendmail(fromlogman, tovixlogs, msg.as_string())
+					s.quit()
+					self.session.open(MessageBox, sentfiles + ' ' + _('has been sent to the ViX team.\nplease quote') + ' ' + str(ref) + ' ' + _('when asking questions about this log'), MessageBox.TYPE_INFO)
+			except Exception, e:
+				self.session.open(MessageBox, _("Error:\n%s" % e), MessageBox.TYPE_INFO, timeout = 10)
+		else:
+			self.session.open(MessageBox, _('You have not setup your user info in the setup screen\nPress MENU, enter your info, and then try again'), MessageBox.TYPE_INFO, timeout = 10)
+
+	def myclose(self):
+		self.close()
+>>>>>>> dev/Dev
 
 class LogManagerViewLog(Screen):
 	def __init__(self, session, selected):
@@ -363,6 +515,10 @@ class LogManagerFb(Screen):
 		self["yellow"] = Label(_("copy"))
 		self["blue"] = Label(_("rename"))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev/Dev
 		self["actions"] = ActionMap(["ChannelSelectBaseActions","WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions"],
 			{
 			 "ok": self.ok,
@@ -376,6 +532,10 @@ class LogManagerFb(Screen):
 		self.onLayoutFinish.append(self.mainlist)
 
 	def exit(self):
+<<<<<<< HEAD
+=======
+		config.logmanager.additionalinfo.setValue("")
+>>>>>>> dev/Dev
 		if self["list"].getCurrentDirectory():
 			config.logmanager.path.setValue(self["list"].getCurrentDirectory())
 			config.logmanager.path.save()
@@ -410,6 +570,10 @@ class LogManagerFb(Screen):
 		self.setTitle(self.SOURCELIST.getCurrentDirectory())
 
 	def onFileAction(self):
+<<<<<<< HEAD
+=======
+		config.logmanager.additionalinfo.setValue(file(self.SOURCELIST.getCurrentDirectory()+self.SOURCELIST.getFilename()).read())
+>>>>>>> dev/Dev
 		if self["list"].getCurrentDirectory():
 			config.logmanager.path.setValue(self["list"].getCurrentDirectory())
 			config.logmanager.path.save()

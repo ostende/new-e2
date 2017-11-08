@@ -9,8 +9,11 @@
 #include <set>
 #include <queue>
 
+<<<<<<< HEAD
 #include <lib/network/serversocket.h>
 
+=======
+>>>>>>> dev/Dev
 class eDVBCISession;
 class eDVBCIApplicationManagerSession;
 class eDVBCICAManagerSession;
@@ -115,6 +118,7 @@ typedef std::list<CIPmtHandler> PMTHandlerList;
 
 #endif // SWIG
 
+<<<<<<< HEAD
 #ifndef SWIG
 class eCIClient : public eUnixDomainSocket
 {
@@ -164,21 +168,32 @@ class eDVBCIInterfaces: public eServerSocket
 #else
 class eDVBCIInterfaces
 #endif
+=======
+class eDVBCIInterfaces
+>>>>>>> dev/Dev
 {
 	DECLARE_REF(eDVBCIInterfaces);
 	static eDVBCIInterfaces *instance;
 	eSmartPtrList<eDVBCISlot> m_slots;
+<<<<<<< HEAD
 	PMTHandlerList m_pmt_handlers; 
 
 	eCIClient *client;
+=======
+	eDVBCISlot *getSlot(int slotid);
+	PMTHandlerList m_pmt_handlers;
+>>>>>>> dev/Dev
 #ifndef SWIG
 public:
 #endif
 	eDVBCIInterfaces();
 	~eDVBCIInterfaces();
 
+<<<<<<< HEAD
 	eDVBCISlot *getSlot(int slotid);
 
+=======
+>>>>>>> dev/Dev
 	void addPMTHandler(eDVBServicePMTHandler *pmthandler);
 	void removePMTHandler(eDVBServicePMTHandler *pmthandler);
 	void recheckPMTHandlers();
@@ -197,10 +212,13 @@ public:
 	int sendCAPMT(int slot);
 	int setInputSource(int tunerno, const std::string &source);
 	int setCIClockRate(int slot, int rate);
+<<<<<<< HEAD
 
 	void newConnection(int socket);
 	void connectionLost();
 
+=======
+>>>>>>> dev/Dev
 #ifdef SWIG
 public:
 #endif
@@ -209,9 +227,12 @@ public:
 	PyObject *getDescrambleRules(int slotid);
 	RESULT setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject) );
 	PyObject *readCICaIds(int slotid);
+<<<<<<< HEAD
 
 	void sendDataToHelper(int cmd, int slot, int session, unsigned long idtag, unsigned char *tag, unsigned char *data, int len);
 	bool isClientConnected();
+=======
+>>>>>>> dev/Dev
 };
 
 #endif

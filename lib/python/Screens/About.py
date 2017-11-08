@@ -62,11 +62,19 @@ class About(Screen):
 									})
 
 	def populate(self):
+<<<<<<< HEAD
 		self["lab1"] = StaticText(_("Open Black Hole Image"))
 		self["lab2"] = StaticText(_("By Bh Team"))
 		model = None
 		AboutText = ""
 		self["lab3"] = StaticText(_("Support at") + " www.vuplus-community.net")
+=======
+		self["lab1"] = StaticText(_("Virtuosso Image Xtreme"))
+		self["lab2"] = StaticText(_("By Team ViX"))
+		model = None
+		AboutText = ""
+		self["lab3"] = StaticText(_("Support at") + " www.world-of-satellite.com")
+>>>>>>> dev/Dev
 
 		AboutText += _("Model:\t%s %s\n") % (getMachineBrand(), getMachineName())
 
@@ -77,7 +85,10 @@ class About(Screen):
 				AboutText += _("Chipset:\t%s\n") % about.getChipSetString().upper()
 
 		AboutText += _("CPU:\t%s %s %s\n") % (about.getCPUArch(), about.getCPUSpeedString(), about.getCpuCoresString())
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev/Dev
 		imageSubBuild = ""
 		if getImageType() != 'release':
 			imageSubBuild = ".%s" % getImageDevBuild()
@@ -345,9 +356,15 @@ class SystemMemoryInfo(Screen):
 			self["menu_path_compressed"] = StaticText("")
 		Screen.setTitle(self, title)
 		self.skinName = ["SystemMemoryInfo", "About"]
+<<<<<<< HEAD
 		self["lab1"] = StaticText(_("Open Black Hole Image"))
 		self["lab2"] = StaticText(_("By Bh Team"))
 		self["lab3"] = StaticText(_("Support at") + " www.vuplus-community.net")
+=======
+		self["lab1"] = StaticText(_("Virtuosso Image Xtreme"))
+		self["lab2"] = StaticText(_("By Team ViX"))
+		self["lab3"] = StaticText(_("Support at") + " www.world-of-satellite.com")
+>>>>>>> dev/Dev
 		self["AboutScrollLabel"] = ScrollLabel()
 
 		self["key_red"] = Button(_("Close"))
@@ -653,7 +670,11 @@ class SystemNetworkInfo(Screen):
 class AboutSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
+<<<<<<< HEAD
 		self["selected"] = StaticText("OpenBh:" + getImageVersion())
+=======
+		self["selected"] = StaticText("ViX:" + getImageVersion())
+>>>>>>> dev/Dev
 
 		AboutText = _("Model: %s %s\n") % (getMachineBrand(), getMachineName())
 

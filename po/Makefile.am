@@ -38,7 +38,10 @@ install-data-local: $(LANGMO)
 		$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES; \
 		$(INSTALL_DATA) $$lang.po $(DESTDIR)$(pkgdatadir)/po/@PACKAGE_NAME@-$$lang.po; \
 		$(INSTALL_DATA) $$lang.mo $(DESTDIR)$(pkgdatadir)/po/$$lang/LC_MESSAGES/@PACKAGE_NAME@.mo; \
+<<<<<<< HEAD
 		$(INSTALL_DATA) $$lang.po $(DESTDIR)$(pkgdatadir)/po/$$lang.po; \
+=======
+>>>>>>> dev/Dev
 	done
 
 uninstall-local:

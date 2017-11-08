@@ -99,7 +99,11 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				self.list.append(getConfigListEntry(_("Protect manufacturer reset screen"), config.ParentalControl.config_sections.manufacturer_reset))
 				self.list.append(getConfigListEntry(_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
 				self.list.append(getConfigListEntry(_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
+<<<<<<< HEAD
 				self.list.append(getConfigListEntry(_("Protect menu"), config.ParentalControl.config_sections.vixmenu))
+=======
+				self.list.append(getConfigListEntry(_("Protect vix menu"), config.ParentalControl.config_sections.vixmenu))
+>>>>>>> dev/Dev
 		else:
 			self.changePin = getConfigListEntry(_("Enable parental protection"), NoSave(ConfigNothing()))
 			self.list.append(self.changePin)

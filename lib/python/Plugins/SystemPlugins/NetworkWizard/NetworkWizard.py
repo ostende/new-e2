@@ -232,6 +232,7 @@ class NetworkWizard(WizardLanguage, Rc):
 			self.InterfaceState = False
 		self.AdapterRef.close(True)
 
+<<<<<<< HEAD
 
 	def bH_close(self):
 		from Screens.BpSet import BhSpeedUp
@@ -245,6 +246,8 @@ class NetworkWizard(WizardLanguage, Rc):
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
 
+=======
+>>>>>>> dev/Dev
 	def checkWlanStateCB(self,data,status):
 		if data is not None:
 			if data is True:

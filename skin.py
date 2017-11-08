@@ -90,7 +90,11 @@ def skin_user_skinname():
 
 # example: loadSkin("nemesis_greenline/skin.xml")
 config.skin = ConfigSubsection()
+<<<<<<< HEAD
 DEFAULT_SKIN = "BlackShadowSE_P/skin.xml"
+=======
+DEFAULT_SKIN = "ViX-Night-HD/skin.xml"
+>>>>>>> dev/Dev
 if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
 	# in that case, fallback to Magic (which is an SD skin)
 	DEFAULT_SKIN = "skin.xml"

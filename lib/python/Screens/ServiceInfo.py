@@ -207,11 +207,20 @@ class ServiceInfo(Screen):
 			videocodec = "-"
 			resolution = "-"
 			if self.info:
+<<<<<<< HEAD
 				videocodec =  ("MPEG2", "MPEG4 H.264", "MPEG1", "MPEG4-VC", "VC1", "VC1-SM", "HEVC H.265", "N/A")[self.info.getInfo(iServiceInformation.sVideoType)]
 				width = self.info.getInfo(iServiceInformation.sVideoWidth)
 				height = self.info.getInfo(iServiceInformation.sVideoHeight)
 				if width > 0 and height > 0:
 					resolution = "%dx%d - " % (width,height)
+=======
+				videocodec =  ("MPEG2", "AVC", "MPEG1", "MPEG4-VC", "VC1", "VC1-SM", "HEVC", "N/A")[self.info.getInfo(iServiceInformation.sVideoType)]
+				width = self.info.getInfo(iServiceInformation.sVideoWidth)
+				height = self.info.getInfo(iServiceInformation.sVideoHeight)
+				if width > 0 and height > 0:
+					resolution = videocodec + " - "
+					resolution += "%dx%d - " % (width,height)
+>>>>>>> dev/Dev
 					resolution += str((self.info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000)
 					resolution += ("i", "p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
 					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
@@ -219,22 +228,34 @@ class ServiceInfo(Screen):
 					resolution += " - "+aspect+""
 			if "%3a//" in refstr and reftype not in (1,257,4098,4114):
 				fillList = [(_("Service name"), name, TYPE_TEXT),
+<<<<<<< HEAD
 					(_("Videocodec"), videocodec, TYPE_TEXT),
 					(_("Resolution & format"), resolution, TYPE_TEXT),
+=======
+					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
+>>>>>>> dev/Dev
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 			else:
 				if ":/" in refstr:
 					fillList = [(_("Service name"), name, TYPE_TEXT),
+<<<<<<< HEAD
 						(_("Videocodec"), videocodec, TYPE_TEXT),
 						(_("Resolution & format"), resolution, TYPE_TEXT),
+=======
+						(_("Videocodec, size & format"), resolution, TYPE_TEXT),
+>>>>>>> dev/Dev
 						(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 						(_("Filename"), refstr.split(":")[10], TYPE_TEXT)]
 				else:
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT),
+<<<<<<< HEAD
 						(_("Videocodec"), videocodec, TYPE_TEXT),
 						(_("Resolution & format"), resolution, TYPE_TEXT)]
+=======
+						(_("Videocodec, size & format"), resolution, TYPE_TEXT)]
+>>>>>>> dev/Dev
 					if "%3a//" in refstr:
 						fillList = fillList + [(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 							(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
@@ -317,12 +338,19 @@ class ServiceInfo(Screen):
 					(_("Inversion"), "%s" % frontendData["inversion"], TYPE_TEXT))
 			elif frontendDataOrg["tuner_type"] == "DVB-T":
 				return (tuner,
+<<<<<<< HEAD
 					(_("Frequency & Channel"), "%s - Ch. %s" % (frontendData.get("frequency", 0), getChannelNumber(frontendData["frequency"], frontendData["tuner_number"])), TYPE_TEXT),
 					(_("Inversion & Bandwidth"), "%s - %s" % (frontendData["inversion"], frontendData["bandwidth"]), TYPE_TEXT),
 					(_("Code Rate LP-HP"), "%s - %s" % (frontendData["code_rate_lp"], frontendData["code_rate_hp"]), TYPE_TEXT),
 					(_("Guard interval"), frontendData["guard_interval"], TYPE_TEXT),
 					(_("Constellation"), frontendData["constellation"], TYPE_TEXT),
 					(_("Transmission mode"), frontendData["transmission_mode"], TYPE_TEXT),
+=======
+					(_("Frequency & Channel"), "%.3f MHz" % ((frontendData.get("frequency", 0) / 1000) / 1000.0) + " - " + frontendData["channel"], TYPE_TEXT),
+					(_("Inversion & Bandwidth"), "%s - %s" % (frontendData["inversion"], frontendData["bandwidth"]), TYPE_TEXT),
+					(_("Code R. LP-HP & Guard Int"), "%s - %s - %s" % (frontendData["code_rate_lp"], frontendData["code_rate_hp"], frontendData["guard_interval"]), TYPE_TEXT),
+					(_("Constellation & FFT mode"), "%s - %s" % (frontendData["constellation"], frontendData["transmission_mode"]), TYPE_TEXT),
+>>>>>>> dev/Dev
 					(_("Hierarchy info"), "%s" % frontendData["hierarchy_information"], TYPE_TEXT))
 			elif frontendDataOrg["tuner_type"] == "ATSC":
 				return (tuner,

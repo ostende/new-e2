@@ -140,7 +140,11 @@ class FeedsStatusCheck:
 		elif self.feedstatus in ('updating', 403):
 			return _("Sorry feeds are down for maintenance, please try again later. If this issue persists please check openvix.co.uk or world-of-satellite.com.")
 		elif error:
+<<<<<<< HEAD
 			return _("There has been an error, please try again later. If this issue persists, please check vuplus-community.net")
+=======
+			return _("There has been an error, please try again later. If this issue persists, please check openvix.co.uk or world-of-satellite.com")
+>>>>>>> dev/Dev
 
 	def startCheck(self):
 		global error

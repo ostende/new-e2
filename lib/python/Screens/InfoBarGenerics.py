@@ -173,6 +173,7 @@ class InfoBarUnhandledKey:
 
 	#this function is called on every keypress!
 	def actionA(self, key, flag):
+<<<<<<< HEAD
 		mkey = "unset"
 		try:
 			mkey = getKeyDescription(key)[0]
@@ -184,6 +185,16 @@ class InfoBarUnhandledKey:
 			if not config.usage.fix_second_infobar.value or mkey not in ("LEFT", "RIGHT", "BOUQUET+", "BOUQUET-"):
 				self.secondInfoBarScreen.hide()
 				self.secondInfoBarWasShown = False
+=======
+		try:
+			print '[InfoBarGenerics] KEY: %s %s' % (key,getKeyDescription(key)[0])
+		except:
+			print '[InfoBarGenerics] KEY: %s' % key
+		self.unhandledKeyDialog.hide()
+		if self.closeSIB(key) and self.secondInfoBarScreen and self.secondInfoBarScreen.shown:
+			self.secondInfoBarScreen.hide()
+			self.secondInfoBarWasShown = False
+>>>>>>> dev/Dev
 
 		if flag != 4:
 			if self.flags & (1<<1):
@@ -301,9 +312,15 @@ class SecondInfoBar(Screen):
 
 	def __Show(self):
 		if config.vixsettings.ColouredButtons.value:
+<<<<<<< HEAD
 			self["key_yellow"].setText(_("Audio Panel"))
 		self["key_red"].setText(_(" "))
 		self["key_blue"].setText(_("Blue Panel"))
+=======
+			self["key_yellow"].setText(_("Search"))
+		self["key_red"].setText(_("Similar"))
+		self["key_blue"].setText(_("Extensions"))
+>>>>>>> dev/Dev
 		self["SecondInfoBar"].doBind()
 		self.getEvent()
 
@@ -340,7 +357,11 @@ class SecondInfoBar(Screen):
 			if self.isRecording:
 				self["key_green"].setText("")
 			else:
+<<<<<<< HEAD
 				self["key_green"].setText(_("Green Panel"))
+=======
+				self["key_green"].setText(_("Add timer"))
+>>>>>>> dev/Dev
 			self.setEvent(self.event)
 
 	def getNowNext(self):
@@ -531,7 +552,11 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.secondInfoBarScreen = ""
 		if isStandardInfoBar(self):
 			self.secondInfoBarScreen = self.session.instantiateDialog(SecondInfoBar)
+<<<<<<< HEAD
 #			self.secondInfoBarScreen.show()
+=======
+			self.secondInfoBarScreen.show()
+>>>>>>> dev/Dev
 
 		self.hideVBILineScreen = self.session.instantiateDialog(HideVBILine)
 		self.hideVBILineScreen.show()
@@ -646,12 +671,16 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				self.hideTimer.start(idx*1000, True)
 
 	def doShow(self):
+<<<<<<< HEAD
 		if config.usage.fix_second_infobar.value and self.secondInfoBarScreen:
 			self.hide()
 			self.secondInfoBarScreen.show()
 			self.secondInfoBarWasShown = True
 		else: 
 			self.show()
+=======
+		self.show()
+>>>>>>> dev/Dev
 		self.startHideTimer()
 
 	def doTimerHide(self):
@@ -699,11 +728,16 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if not hasattr(self, "LongButtonPressed"):
 			self.LongButtonPressed = False
 		if not self.LongButtonPressed:
+<<<<<<< HEAD
 			if (self.__state == self.STATE_HIDDEN and not config.usage.fix_second_infobar.value) or (self.__state == self.STATE_HIDDEN and not self.secondInfoBarScreen):
+=======
+			if self.__state == self.STATE_HIDDEN:
+>>>>>>> dev/Dev
 				if not self.secondInfoBarWasShown:
 					self.show()
 				if self.secondInfoBarScreen:
 					self.secondInfoBarScreen.hide()
+<<<<<<< HEAD
 					self.secondInfoBarWasShown = False
 				self.EventViewIsShown = False
 			elif self.__state == self.STATE_HIDDEN and config.usage.fix_second_infobar.value:
@@ -717,6 +751,10 @@ class InfoBarShowHide(InfoBarScreenSaver):
 					self.secondInfoBarScreen.hide()
 					self.secondInfoBarWasShown = False
 					
+=======
+				self.secondInfoBarWasShown = False
+				self.EventViewIsShown = False
+>>>>>>> dev/Dev
 			elif isStandardInfoBar(self) and config.usage.show_second_infobar.value == "EPG":
 				self.showDefaultEPG()
 			elif isStandardInfoBar(self) and config.usage.show_second_infobar.value == "INFOBAREPG":
@@ -861,7 +899,11 @@ class NumberZap(Screen):
 
 		self.handleServiceName()
 
+<<<<<<< HEAD
 		if len(self.numberString) >= 5:
+=======
+		if len(self.numberString) >= 4:
+>>>>>>> dev/Dev
 			self.keyOK()
 
 	def __init__(self, session, number, searchNumberFunction = None):
@@ -1138,7 +1180,11 @@ class InfoBarChannelSelection:
 			self.servicelist.historyZap(+1)
 
 	def switchChannelUp(self):
+<<<<<<< HEAD
 #		if not self.secondInfoBarScreen.shown:
+=======
+		if not self.secondInfoBarScreen.shown:
+>>>>>>> dev/Dev
 			self.keyHide()
 			if not self.LongButtonPressed or SystemInfo.get("NumVideoDecoders", 1) <= 1:
 				if not config.usage.show_bouquetalways.value:
@@ -1158,7 +1204,11 @@ class InfoBarChannelSelection:
 					self.session.execDialog(self.servicelist2)
 
 	def switchChannelDown(self):
+<<<<<<< HEAD
 #		if not self.secondInfoBarScreen.shown:
+=======
+		if not self.secondInfoBarScreen.shown:
+>>>>>>> dev/Dev
 			self.keyHide()
 			if not self.LongButtonPressed or SystemInfo.get("NumVideoDecoders", 1) <= 1:
 				if not config.usage.show_bouquetalways.value:
@@ -1500,7 +1550,11 @@ class InfoBarEPG:
 			answer[1]()
 
 	def RedPressed(self):
+<<<<<<< HEAD
 		if isStandardInfoBar(self):
+=======
+		if isStandardInfoBar(self) or isMoviePlayerInfoBar(self):
+>>>>>>> dev/Dev
 			if config.usage.defaultEPGType.value != _("Graphical EPG") and config.usage.defaultEPGType.value != _("None"):
 					self.openGraphEPG()
 			else:
@@ -1519,8 +1573,12 @@ class InfoBarEPG:
 
 	def EPGPressed(self):
 		if isStandardInfoBar(self) or isMoviePlayerInfoBar(self):
+<<<<<<< HEAD
 #			self.openGraphEPG()
 			self.openEventView()
+=======
+			self.openGraphEPG()
+>>>>>>> dev/Dev
 
 	def showEventInfoWhenNotVisible(self):
 		if self.shown:
@@ -1643,7 +1701,11 @@ class InfoBarEPG:
 					self.runPlugin(plugin)
 					break
 		else:
+<<<<<<< HEAD
 			self.session.open(MessageBox, _("The Cool TV Guide plugin is not installed!\nDont bother with it and use the default Obh EPG guide instead."), type = MessageBox.TYPE_INFO,timeout = 10 )
+=======
+			self.session.open(MessageBox, _("The Cool TV Guide plugin is not installed!\nDont bother with it and use the default ViX EPG guide instead."), type = MessageBox.TYPE_INFO,timeout = 10 )
+>>>>>>> dev/Dev
 
 	def SingleServiceEPG(self):
 		self.StartBouquet = self.servicelist.getRoot()
@@ -2244,6 +2306,25 @@ class InfoBarSeek:
 		if not config.seek.baractivation.value == "leftright":
 			self.session.open(Seekbar, fwd)
 		else:
+<<<<<<< HEAD
+=======
+			self.session.openWithCallback(self.rwdSeekTo, MinuteInput)
+
+	def seekFwdVod(self, fwd=True):
+		seekable = self.getSeek()
+		if seekable is None:
+			return
+		else:
+			if config.seek.baractivation.value == "leftright":
+				self.session.open(Seekbar, fwd)
+			else:
+				self.session.openWithCallback(self.fwdSeekTo, MinuteInput)
+
+	def seekFwdSeekbar(self, fwd=True):
+		if not config.seek.baractivation.value == "leftright":
+			self.session.open(Seekbar, fwd)
+		else:
+>>>>>>> dev/Dev
 			self.session.openWithCallback(self.fwdSeekTo, MinuteInput)
 
 	def fwdSeekTo(self, minutes):
@@ -2256,8 +2337,13 @@ class InfoBarSeek:
 			self.session.openWithCallback(self.rwdSeekTo, MinuteInput)
 
 	def rwdSeekTo(self, minutes):
+<<<<<<< HEAD
 #		print "[InfoBarGenerics] rwdSeekTo"
 		self.doSeekRelative(-minutes * 60 * 90000)
+=======
+#		print "rwdSeekTo"
+			self.doSeekRelative(-minutes * 60 * 90000)
+>>>>>>> dev/Dev
 
 	def checkSkipShowHideLock(self):
 		if self.seekstate == self.SEEK_STATE_PLAY or self.seekstate == self.SEEK_STATE_EOF:
@@ -2510,13 +2596,33 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getCCcamInfo(self):
+<<<<<<< HEAD
 		return []
+=======
+		if pathExists('/usr/softcams/'):
+			softcams = os.listdir('/usr/softcams/')
+		for softcam in softcams:
+			if softcam.lower().startswith('cccam') and config.cccaminfo.showInExtensions.value:
+				return [((boundFunction(self.getCCname), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
+		else:
+			return []
+>>>>>>> dev/Dev
 
 	def getOSname(self):
 		return _("OScam Info")
 
 	def getOScamInfo(self):
+<<<<<<< HEAD
 		return []
+=======
+		if pathExists('/usr/softcams/'):
+			softcams = os.listdir('/usr/softcams/')
+		for softcam in softcams:
+			if softcam.lower().startswith('oscam') and config.oscaminfo.showInExtensions.value:
+				return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+		else:
+			return []
+>>>>>>> dev/Dev
 
 	def addExtension(self, extension, key = None, type = EXTENSION_SINGLE):
 		self.list.append((type, extension, key))
@@ -2572,11 +2678,16 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def showPluginBrowser(self):
+<<<<<<< HEAD
 # In Bh image blue press = blue panel
 #		from Screens.PluginBrowser import PluginBrowser
 #		self.session.open(PluginBrowser)
 		from Screens.BpBlue import DeliteBluePanel
 		self.session.open(DeliteBluePanel)
+=======
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.open(PluginBrowser)
+>>>>>>> dev/Dev
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
@@ -3310,6 +3421,7 @@ class InfoBarSubserviceSelection:
 		self.bsel = None
 
 	def GreenPressed(self):
+<<<<<<< HEAD
 		service = self.session.nav.getCurrentService()
 		subservices = service and service.subServices()
 		if not subservices or subservices.getNumberOfSubservices() == 0:
@@ -3318,6 +3430,10 @@ class InfoBarSubserviceSelection:
 				self.session.open(DeliteGreenPanel)
 			except:
 				pass
+=======
+		if not config.vixsettings.Subservice.value:
+			self.openTimerList()
+>>>>>>> dev/Dev
 		else:
 			self.subserviceSelection()
 

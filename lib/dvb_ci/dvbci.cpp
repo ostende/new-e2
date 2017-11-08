@@ -35,6 +35,7 @@
 
 eDVBCIInterfaces *eDVBCIInterfaces::instance = 0;
 
+<<<<<<< HEAD
 
 eCIClient::eCIClient(eDVBCIInterfaces *handler, int socket) : eUnixDomainSocket(socket, 1, eApp), parent(handler)
 {
@@ -148,12 +149,18 @@ bool eDVBCIInterfaces::isClientConnected()
 
 eDVBCIInterfaces::eDVBCIInterfaces()
  : eServerSocket(CIPLUS_SERVER_SOCKET, eApp)
+=======
+eDVBCIInterfaces::eDVBCIInterfaces()
+>>>>>>> dev/Dev
 {
 	int num_ci = 0;
 	std::stringstream path;
 
 	instance = this;
+<<<<<<< HEAD
 	client = NULL;
+=======
+>>>>>>> dev/Dev
 
 	eDebug("[CI] scanning for common interfaces..");
 

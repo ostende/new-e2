@@ -45,6 +45,7 @@ public:
 
 	static int pollAll();
 
+<<<<<<< HEAD
 	static void setAction(unsigned int session, int val);
 };
 
@@ -59,6 +60,8 @@ class eDVBCIPlusHelper: public eDVBCISession
 public:
 	eDVBCIPlusHelper(eDVBCISlot *tslot, unsigned long tag, int session);
 	~eDVBCIPlusHelper();
+=======
+>>>>>>> dev/Dev
 };
 
 #endif

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 SUBDIRS = OBH-LCDskin
 
+=======
+>>>>>>> dev/Dev
 installdir = $(pkgdatadir)/display/skin_default
 dist_install_DATA = *.png
 

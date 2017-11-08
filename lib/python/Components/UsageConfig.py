@@ -64,7 +64,10 @@ def InitUsageConfig():
 	choicelist = [("0", _("No timeout"))]
 	for i in range(1, 21):
 		choicelist.append((str(i), ngettext("%d second", "%d seconds", i) % i))
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev/Dev
 	config.usage.infobar_timeout = ConfigSelection(default = "5", choices = choicelist)
 	config.usage.show_infobar_do_dimming = ConfigYesNo(default = False)
 	config.usage.show_infobar_dimming_speed = ConfigSelectionNumber(min = 1, max = 40, stepwidth = 1, default = 40, wraparound = True)
@@ -73,8 +76,11 @@ def InitUsageConfig():
 	config.usage.show_infobar_on_event_change = ConfigYesNo(default = False)
 	config.usage.show_infobar_channel_number = ConfigYesNo(default = False)
 	config.usage.show_second_infobar = ConfigSelection(default = "5", choices = [("none", _("None"))] + choicelist + [("EPG",_("EPG")),("INFOBAREPG",_("InfoBar EPG"))])
+<<<<<<< HEAD
 	config.usage.fix_second_infobar = ConfigYesNo(default = False)
 
+=======
+>>>>>>> dev/Dev
 	def showsecondinfobarChanged(configElement):
 		if config.usage.show_second_infobar.value != "INFOBAREPG":
 			SystemInfo["InfoBarEpg"] = True
@@ -86,7 +92,11 @@ def InitUsageConfig():
 	config.usage.show_picon_bkgrn = ConfigSelection(default = "transparent", choices = [("none", _("Disabled")), ("transparent", _("Transparent")), ("blue", _("Blue")), ("red", _("Red")), ("black", _("Black")), ("white", _("White")), ("lightgrey", _("Light Grey")), ("grey", _("Grey"))])
 	config.usage.show_genre_info = ConfigYesNo(default=False)
 	config.usage.menu_show_numbers = ConfigYesNo(default = False)
+<<<<<<< HEAD
 	config.usage.show_menupath = ConfigSelection(default = "off", choices = [("off", _("None")), ("small", _("Small")), ("large", _("Large"))])
+=======
+	config.usage.show_menupath = ConfigSelection(default = "small", choices = [("off", _("None")), ("small", _("Small")), ("large", _("Large"))])
+>>>>>>> dev/Dev
 	config.usage.show_spinner = ConfigYesNo(default = True)
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 	config.usage.sort_settings = ConfigYesNo(default = False)
@@ -279,7 +289,11 @@ def InitUsageConfig():
 					("1", _("Channel List")),
 					("2", _("Bouquet List"))])
 	config.usage.show_bouquetalways = ConfigYesNo(default = False)
+<<<<<<< HEAD
 	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barleft', choices = [
+=======
+	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barright', choices = [
+>>>>>>> dev/Dev
 		('barleft', _("Progress bar left")),
 		('barright', _("Progress bar right")),
 		('percleft', _("Percentage left")),
@@ -992,13 +1006,25 @@ def InitUsageConfig():
 
 	config.logmanager = ConfigSubsection()
 	config.logmanager.showinextensions = ConfigYesNo(default = False)
+<<<<<<< HEAD
 	config.logmanager.path = ConfigText(default = "/")
+=======
+	config.logmanager.user = ConfigText(default='', fixed_size=False)
+	config.logmanager.useremail = ConfigText(default='', fixed_size=False)
+	config.logmanager.usersendcopy = ConfigYesNo(default = True)
+	config.logmanager.path = ConfigText(default = "/")
+	config.logmanager.additionalinfo = NoSave(ConfigText(default = ""))
+>>>>>>> dev/Dev
 	config.logmanager.sentfiles = ConfigLocations(default='')
 
 	config.vixsettings = ConfigSubsection()
 	config.vixsettings.Subservice = ConfigYesNo(default = False)
 	config.vixsettings.ColouredButtons = ConfigYesNo(default = True)
+<<<<<<< HEAD
 	config.vixsettings.InfoBarEpg_mode = ConfigSelection(default="0", choices = [
+=======
+	config.vixsettings.InfoBarEpg_mode = ConfigSelection(default="3", choices = [
+>>>>>>> dev/Dev
 					("0", _("as plugin in extended bar")),
 					("1", _("with long OK press")),
 					("2", _("with exit button")),
@@ -1077,7 +1103,13 @@ def InitUsageConfig():
 	config.epgselection.graph_infowidth = ConfigSelectionNumber(default = 50, stepwidth = 25, min = 0, max = 150, wraparound = True)
 	config.epgselection.graph_rec_icon_height = ConfigSelection(choices = [("bottom",_("bottom")),("top", _("top")), ("middle", _("middle")),  ("hide", _("hide"))], default = "bottom")
 
+<<<<<<< HEAD
 	softcams = []
+=======
+	if not os.path.exists('/usr/softcams/'):
+		os.mkdir('/usr/softcams/',0755)
+	softcams = os.listdir('/usr/softcams/')
+>>>>>>> dev/Dev
 	config.oscaminfo = ConfigSubsection()
 	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.oscaminfo.userdatafromconf = ConfigYesNo(default = True)

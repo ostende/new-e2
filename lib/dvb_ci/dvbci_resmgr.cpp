@@ -68,10 +68,14 @@ int eDVBCIResourceManagerSession::doAction()
 	case stateProfileEnquiry:
 	{
 		const unsigned char tag[3]={0x9F, 0x80, 0x11};
+<<<<<<< HEAD
 
 		if (!eDVBCIInterfaces::getInstance()->isClientConnected())
 		{
 			const unsigned char data[][4]=
+=======
+		const unsigned char data[][4]=
+>>>>>>> dev/Dev
 			{
 				{0x00, 0x01, 0x00, 0x41},
 				{0x00, 0x02, 0x00, 0x41},
@@ -81,6 +85,7 @@ int eDVBCIResourceManagerSession::doAction()
 				{0x00, 0x40, 0x00, 0x41},
 //				{0x00, 0x10, 0x00, 0x41}, // auth.
 			};
+<<<<<<< HEAD
 			sendAPDU(tag, data, sizeof(data));
 		}
 		else
@@ -103,6 +108,9 @@ int eDVBCIResourceManagerSession::doAction()
 			};
 			sendAPDU(tag, data, sizeof(data));
 		}
+=======
+		sendAPDU(tag, data, sizeof(data));
+>>>>>>> dev/Dev
 		state=stateFinal;
 		return 0;
 	}

@@ -45,10 +45,13 @@ class AVSwitch:
 					   "60Hz":  { 60: "2160p" },
 					   "multi": { 50: "2160p50", 60: "2160p" } }
 
+<<<<<<< HEAD
 	rates["2160p30"] = { "25Hz":  { 50: "2160p25" },
 						 "30Hz":  { 60: "2160p30"} ,
 						 "multi": { 50: "2160p25", 60: "2160p30" } }
 
+=======
+>>>>>>> dev/Dev
 	rates["PC"] = {
 		"1024x768": { 60: "1024x768" }, # not possible on DM7025
 		"800x600" : { 60: "800x600" },  # also not possible
@@ -69,8 +72,13 @@ class AVSwitch:
 	# modes["DVI-PC"] = ["PC"]
 
 	if about.getChipSetString() in ('5272s', '7251', '7251s', '7252', '7252s', '7366', '7376', '7444s'):
+<<<<<<< HEAD
 		modes["HDMI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "2160p", "2160p30", "1080i"}
+=======
+		modes["HDMI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
+		widescreen_modes = {"720p", "1080p", "2160p", "1080i"}
+>>>>>>> dev/Dev
 	elif about.getChipSetString() in ('7241', '7356', '73565', '7358', '7362', '73625', '7424', '7425', '7552'):
 		modes["HDMI"] = ["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
@@ -79,7 +87,11 @@ class AVSwitch:
 		widescreen_modes = {"720p", "1080i"}
 
 	modes["YPbPr"] = modes["HDMI"]
+<<<<<<< HEAD
 	if getBrandOEM() == 'vuplus' and getBoxType() not in ('vusolo4k', 'vuuno4k', 'vuultimo4k'):
+=======
+	if getBrandOEM() == 'vuplus' and getBoxType() not in ('vusolo4k', 'vuultimo4k', 'vuuno4k'):
+>>>>>>> dev/Dev
 		modes["Scart-YPbPr"] = modes["HDMI"]
 
 	# if "DVI-PC" in modes and not getModeList("DVI-PC"):

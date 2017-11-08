@@ -4,11 +4,14 @@ import locale
 import os
 
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
+<<<<<<< HEAD
 from time import time, localtime, strftime
 
 LPATH = resolveFilename(SCOPE_LANGUAGE, "")
 
 Lpackagename = "enigma2-locale-"
+=======
+>>>>>>> dev/Dev
 
 class Language:
 	def __init__(self):
@@ -18,6 +21,7 @@ class Language:
 		self.activeLanguage = 0
 		self.catalog = None
 		self.lang = {}
+<<<<<<< HEAD
 		self.InitLang()
 		self.callbacks = []
 
@@ -25,6 +29,9 @@ class Language:
 		self.langlist = []
 		self.langlistselection = []
 		self.ll = os.listdir(LPATH)
+=======
+		self.langlist = []
+>>>>>>> dev/Dev
 		# FIXME make list dynamically
 		# name, iso-639 language, iso-3166 country. Please don't mix language&country!
 		self.addLanguage("Arabic", "ar", "AE", "ISO-8859-15")
@@ -68,6 +75,7 @@ class Language:
 		self.addLanguage("Türkçe", "tr", "TR", "ISO-8859-15")
 		self.addLanguage("Ukrainian", "uk", "UA", "ISO-8859-15")
 
+<<<<<<< HEAD
 	def addLanguage(self, name, lang, country, encoding):
 		try:
 			if lang in self.ll:
@@ -82,6 +90,16 @@ class Language:
 		except:
 			print "[Language] Language " + str(name) + " not found"
 		self.langlistselection.append((str(lang + "_" + country), name))
+=======
+		self.callbacks = []
+
+	def addLanguage(self, name, lang, country, encoding):
+		try:
+			self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
+			self.langlist.append(str(lang + "_" + country))
+		except:
+			print "[Language] Language " + str(name) + " not found"
+>>>>>>> dev/Dev
 
 	def activateLanguage(self, index):
 		try:
@@ -114,9 +132,12 @@ class Language:
 	def getLanguageList(self):
 		return [ (x, self.lang[x]) for x in self.langlist ]
 
+<<<<<<< HEAD
 	def getLanguageListSelection(self):
 		return self.langlistselection
 
+=======
+>>>>>>> dev/Dev
 	def getActiveLanguage(self):
 		return self.activeLanguage
 
@@ -146,6 +167,7 @@ class Language:
 	def addCallback(self, callback):
 		self.callbacks.append(callback)
 
+<<<<<<< HEAD
 	def delLanguage(self, delLang = None):
 		from Components.config import config, configfile
 		from shutil import rmtree
@@ -206,4 +228,6 @@ class Language:
 		catalog = None
 		lang = None
 
+=======
+>>>>>>> dev/Dev
 language = Language()

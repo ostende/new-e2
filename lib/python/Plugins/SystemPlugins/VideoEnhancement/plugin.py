@@ -174,7 +174,11 @@ class VideoEnhancementSetup(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		if self["config"].isChanged():
+<<<<<<< HEAD
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default = True)
+=======
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default = False)
+>>>>>>> dev/Dev
 		else:
 			self.close()
 

@@ -2223,10 +2223,17 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def showNetworkMounts(self):
 		import NetworkSetup
 		self.session.open(NetworkSetup.NetworkMountsMenu)
+<<<<<<< HEAD
 		
 	def showDeviceMounts(self):
 		import Screens.BpDevice
 		self.session.open(Screens.BpDevice.DeliteDevicesPanel)
+=======
+
+	def showDeviceMounts(self):
+		import Plugins.SystemPlugins.ViX.MountManager
+		self.session.open(Plugins.SystemPlugins.ViX.MountManager.VIXDevicesPanel)
+>>>>>>> dev/Dev
 
 	def showActionFeedback(self, text):
 		if self.feedbackTimer is None:
